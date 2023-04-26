@@ -5,12 +5,12 @@ import org.csye7374.Item.ItemAPI;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IndividualOrderBuilder implements OrderBuilderAPI {
+public class SingleStoreOrderBuilder implements OrderBuilderAPI {
     public String name = "";
     public List<ItemAPI> items = new ArrayList<>();
     @Override
     public OrderComponentAPI build() {
-        return new IndividualOrder(this);
+        return new SingleStoreOrder(this);
     }
 
     @Override

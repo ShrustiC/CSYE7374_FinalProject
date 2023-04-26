@@ -16,4 +16,8 @@ public class GiftWrapDecorator extends ItemDecorator {
         return this.item.getName() + ", gift wrapped";
     }
 
+    @Override
+    public String toString() {
+        return String.format("Item{price=%f, name=%s}", getPrice(), getName());
+    }
 }

@@ -2,10 +2,10 @@ package org.csye7374.order;
 
 import java.util.ArrayList;
 
-public class ComboOrderComponentFactory implements OrderComponentFactoryAPI {
+public class MultiStoreOrderComponentFactory implements OrderComponentFactoryAPI {
     @Override
     public OrderComponentAPI getObject() {
-        return new ComboOrder(new ArrayList<OrderComponentAPI>(), "");
+        return new MultiStoreOrder(new ArrayList<OrderComponentAPI>(), "");
     }
 
     @Override

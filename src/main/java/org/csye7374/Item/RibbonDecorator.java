@@ -14,4 +14,9 @@ public class RibbonDecorator extends ItemDecorator {
     public String getName() {
         return this.item.getName() + ", with ribbon";
     }
+    @Override
+    public String toString() {
+        return String.format("Item{price=%f, name=%s}", getPrice(), getName());
+    }
+
 }

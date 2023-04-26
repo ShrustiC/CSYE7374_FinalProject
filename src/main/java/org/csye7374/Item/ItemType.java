@@ -1,5 +1,0 @@
-package org.csye7374.Item;
-
-public enum ItemType {
-    FRENCHFRIES, HAMBURGER, HOTDOG, CHEESEBURGER, BUFFALOWINGS, SALAD, PIZZA
-}

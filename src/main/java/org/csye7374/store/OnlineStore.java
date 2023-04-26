@@ -1,14 +1,14 @@
 package org.csye7374.store;
 
-import org.csye7374.billing.MemberDiscount;
 import org.csye7374.billing.PriceStrategyAPI;
+import org.csye7374.billing.ZeroDiscount;
 import org.csye7374.utils.AdvancedCalculatorAPI;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class OnlineStore implements OnlineStoreAPI {
-    private PriceStrategyAPI s = new MemberDiscount();
+    private PriceStrategyAPI s = new ZeroDiscount();
     private List<Double> itemList = new ArrayList<>();
     private AdvancedCalculatorAPI cal;
 

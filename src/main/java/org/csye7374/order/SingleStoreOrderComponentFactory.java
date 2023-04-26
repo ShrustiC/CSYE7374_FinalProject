@@ -4,10 +4,10 @@ import org.csye7374.Item.ItemAPI;
 
 import java.util.ArrayList;
 
-public class IndividualOrderComponentFactory implements OrderComponentFactoryAPI {
+public class SingleStoreOrderComponentFactory implements OrderComponentFactoryAPI {
     @Override
     public OrderComponentAPI getObject() {
-        return new IndividualOrder(new ArrayList<ItemAPI>(), "");
+        return new SingleStoreOrder(new ArrayList<ItemAPI>(), "");
     }
 
     @Override

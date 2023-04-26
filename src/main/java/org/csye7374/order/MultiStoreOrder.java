@@ -3,17 +3,17 @@ package org.csye7374.order;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ComboOrder implements OrderComponentAPI {
+public class MultiStoreOrder implements OrderComponentAPI {
     private List<OrderComponentAPI> orders = new ArrayList<>();
     private String name = "";
     private int id = getId();
 
-    public ComboOrder(List<OrderComponentAPI> orders, String name) {
+    public MultiStoreOrder(List<OrderComponentAPI> orders, String name) {
         this.orders = orders;
         this.name = name;
     }
 
-    public ComboOrder(ComboOrderBuilder builder) {
+    public MultiStoreOrder(MultiStoreOrderBuilder builder) {
         this.name = builder.name;
         this.orders = builder.orders;
     }
@@ -32,7 +32,7 @@ public class ComboOrder implements OrderComponentAPI {
         return price;
     }
 
-    public ComboOrder add(OrderComponentAPI child) {
+    public MultiStoreOrder add(OrderComponentAPI child) {
         orders.add(child);
         return this;
     }
@@ -53,7 +53,7 @@ public class ComboOrder implements OrderComponentAPI {
 
     @Override
     public String toString() {
-        return "ComboOrder{" +
+        return "MultiStoreOrder{" +
                 "orders=" + orders +
                 ", name='" + name + '\'' +
                 ", id=" + id +
