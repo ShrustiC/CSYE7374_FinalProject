@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Driver {
-    public static void main(String[] args) throws CloneNotSupportedException{
+    public static void main(String[] args) {
         System.out.println("App started ....");
         demoState();
         demoItemSingletonFactoryAndBuilder();
@@ -160,7 +160,7 @@ public class Driver {
     private static void demoFacade() {
         System.out.println("-----------------------Facade-----------------------");
         List<ItemAPI> items = new ArrayList<>();
-        Inventory inventory = new Inventory();
+        InventoryFacade inventoryFacade = new InventoryFacade();
         ItemBuilder builder = new ItemBuilder();
         builder.setName("Bananas (x6)").setPrice(4.99);
         items.add(ItemFactoryEagerSingleton.getInstance().getObject(builder));
@@ -170,8 +170,20 @@ public class Driver {
         items.add(ItemFactoryEagerSingleton.getInstance().getObject(builder));
         builder.setName("Ice Cream").setPrice(5.99);
         items.add(ItemFactoryLazySingleton.getInstance().getObject(builder));
-        items.stream().forEach(i -> {inventory.addItem(i);});
-        inventory.isItemAvailable(items.get(1));
+        System.out.println("Available Inventory - ");
+        items.stream().forEach(i -> System.out.println(i));
+        System.out.println("Current item = " + items.get(1));
+        if (inventoryFacade.isItemAvailable(items.get(1), items)) {
+            System.out.println("Item is in stock");
+        }
+        Item i = builder.setName("Candy bar").setPrice(2.59).build();
+        System.out.println("Current item = " + i);
+        if (inventoryFacade.isItemAvailable(i, items)) {
+            System.out.println("Item is in stock");
+        }
+        else {
+            System.out.println("Item is not in stock");
+        }
         System.out.println("-----------------------END-----------------------");
     }
 
@@ -203,7 +215,7 @@ public class Driver {
         System.out.println("-------------------------END-------------------------");
     }
     
-    private static void demoPrototype() throws CloneNotSupportedException {
+    private static void demoPrototype() {
         System.out.println("-----------------------Prototype-----------------------");
         List<ItemAPI> items = new ArrayList<>();
         ItemPrototypeFactory factory = new ItemPrototypeFactory();
