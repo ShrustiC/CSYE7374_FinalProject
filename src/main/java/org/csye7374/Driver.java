@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Driver {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CloneNotSupportedException{
         System.out.println("App started ....");
         demoState();
         demoItemSingletonFactoryAndBuilder();
@@ -22,6 +22,7 @@ public class Driver {
         demoCompositeAdapter();
         demoFacade();
         demoObserver();
+		demoPrototype();		
         System.out.println("App exit ....");
     }
 
@@ -201,15 +202,21 @@ public class Driver {
 
         System.out.println("-------------------------END-------------------------");
     }
+    
+    private static void demoPrototype() throws CloneNotSupportedException {
+        System.out.println("-----------------------Prototype-----------------------");
+        List<ItemAPI> items = new ArrayList<>();
+        ProtoClone protoclone = new ProtoClone();
+        ItemBuilder builder = new ItemBuilder();
+        builder.setName("Twix (x2)").setPrice(7.99);
+        items.add(ItemFactoryEagerSingleton.getInstance().getObject(builder));
+        builder.setName("Maggie 6").setPrice(5.49);
+        items.add(ItemFactoryLazySingleton.getInstance().getObject(builder));  
+        System.out.println("-----------------------END-----------------------");
+    }
 }
 
-/*
-facade --
-state -- check order state
-command -- we will skip
-prototype
-observer --
-*/
+// prototype - need to check
 
 // Item enum check them
 

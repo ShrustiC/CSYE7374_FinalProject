@@ -43,7 +43,8 @@ public class Item implements ItemAPI {
                 '}';
     }
 
-
-
+    public ItemAPI clone() {
+        return new Item(price, name);
+    }
 
 }
