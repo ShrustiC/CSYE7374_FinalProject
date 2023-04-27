@@ -10,7 +10,7 @@ public class InventoryFacade {
         this.inStockState = new InStockState();
     }
 
-    public boolean isItemAvailable(Item item, List<Item> items) {
+    public boolean isItemAvailable(Item item, List<ItemAPI> items) {
         return inStockState.isItemAvailable(item, items);
     }
 }

@@ -1,5 +1,6 @@
 package org.csye7374;
 
+import org.csye7374.Customer.Customer;
 import org.csye7374.Item.*;
 import org.csye7374.billing.*;
 import org.csye7374.order.*;
@@ -20,6 +21,7 @@ public class Driver {
         demoDecorator();
         demoCompositeAdapter();
         demoFacade();
+        demoObserver();
         System.out.println("App exit ....");
     }
 
@@ -89,7 +91,7 @@ public class Driver {
     }
 
     private static void demoStrategy() {
-        System.out.println("-----------------------Bridge-----------------------");
+        System.out.println("-----------------------Strategy-----------------------");
         List<ItemAPI> items = new ArrayList<>();
         ItemBuilder builder = new ItemBuilder();
         builder.setName("Bread loaf").setPrice(5.79);
@@ -170,6 +172,34 @@ public class Driver {
         items.stream().forEach(i -> {inventory.addItem(i);});
         inventory.isItemAvailable(items.get(1));
         System.out.println("-----------------------END-----------------------");
+    }
+
+    private static void demoObserver(){
+        System.out.println("-----------------------Observer-----------------------");
+        List<ItemAPI> items = new ArrayList<>();
+        ItemBuilder builder = new ItemBuilder();
+        builder.setName("Coke cans (x8)").setPrice(7.69);
+        items.add(ItemFactoryEagerSingleton.getInstance().getObject(builder));
+        builder.setName("Tropical Fruit Punch Drink, 59 fl oz Carton").setPrice(2.49);
+        items.add(ItemFactoryEagerSingleton.getInstance().getObject(builder));
+        builder.setName("Gatorade (x6)").setPrice(8.49);
+        items.add(ItemFactoryEagerSingleton.getInstance().getObject(builder));
+
+        DiscountsAndOffers offers = new DiscountsAndOffers();
+        Customer customer1 = new Customer("Davis");
+        Customer customer2 = new Customer("Lily");
+
+        offers.register(customer1);
+        offers.register(customer2);
+
+        offers.addDiscount(items.get(1), 10.0);
+        offers.removeDiscount(items.get(1));
+
+        offers.unregister(customer2);
+
+        offers.addDiscount(items.get(2), 20.0);
+
+        System.out.println("-------------------------END-------------------------");
     }
 }
 
