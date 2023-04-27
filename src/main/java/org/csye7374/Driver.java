@@ -19,6 +19,7 @@ public class Driver {
         demoStrategy();
         demoDecorator();
         demoCompositeAdapter();
+        demoFacade();
         System.out.println("App exit ....");
     }
 
@@ -150,6 +151,24 @@ public class Driver {
 
         OrderComponentAPI order = new MultiStoreOrderComponentFactory().getObject(multiStoreOrder);
         System.out.println(order);
+        System.out.println("-----------------------END-----------------------");
+    }
+
+    private static void demoFacade() {
+        System.out.println("-----------------------Facade-----------------------");
+        List<ItemAPI> items = new ArrayList<>();
+        Inventory inventory = new Inventory();
+        ItemBuilder builder = new ItemBuilder();
+        builder.setName("Bananas (x6)").setPrice(4.99);
+        items.add(ItemFactoryEagerSingleton.getInstance().getObject(builder));
+        builder.setName("Protein Bars (x12)").setPrice(20.49);
+        items.add(ItemFactoryLazySingleton.getInstance().getObject(builder));
+        builder.setName("Milk (x2)").setPrice(10.99);
+        items.add(ItemFactoryEagerSingleton.getInstance().getObject(builder));
+        builder.setName("Ice Cream").setPrice(5.99);
+        items.add(ItemFactoryLazySingleton.getInstance().getObject(builder));
+        items.stream().forEach(i -> {inventory.addItem(i);});
+        inventory.isItemAvailable(items.get(1));
         System.out.println("-----------------------END-----------------------");
     }
 }
