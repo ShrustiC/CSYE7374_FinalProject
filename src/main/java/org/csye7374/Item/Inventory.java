@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Inventory {
     private State state;
-    private List<Item> items;
+    private List<ItemAPI> items;
 
     public Inventory() {
         state = new InStockState();
@@ -16,7 +16,7 @@ public class Inventory {
         this.state = state;
     }
 
-    public void addItem(Item item) {
+    public void addItem(ItemAPI item) {
         items.add(item);
     }
 
@@ -27,8 +27,14 @@ public class Inventory {
         }
     }
 
-    public boolean isItemAvailable(Item item) {
-        return state.isItemAvailable(item, items);
+    public boolean isItemAvailable(ItemAPI item) {
+        boolean flag= state.isItemAvailable(item, items);
+        if(flag){
+            System.out.println(item.getName() + " is available for purchase.");
+        }else{
+            System.out.println(item.getName() + " is out of stock.");
+        }
+        return flag;
     }
 
     public void setOutOfStockState() {

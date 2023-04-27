@@ -1,17 +1,10 @@
 package org.csye7374;
 
 import org.csye7374.Item.*;
-import org.csye7374.billing.MemberDiscount;
-import org.csye7374.billing.SpecialDiscount;
+import org.csye7374.billing.*;
 import org.csye7374.order.*;
-import org.csye7374.store.OnlineStore;
-import org.csye7374.store.OnlineStoreAPI;
-import org.csye7374.store.Store;
-import org.csye7374.store.StoreAPI;
-import org.csye7374.utils.AdvancedCalculator;
-import org.csye7374.utils.AdvancedCalculatorAPI;
-import org.csye7374.utils.BasicCalculator;
-import org.csye7374.utils.CalculatorAPI;
+import org.csye7374.store.*;
+import org.csye7374.utils.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,19 +24,19 @@ public class Driver {
 
     private static void demoState() {
         System.out.println("-----------------------State-----------------------");
-        //State Pattern change the State if Item is not available
-        Item item = new Item( 10.99,"book");
-        Item item1= new Item( 10.99,"pen");
-
+        List<ItemAPI> items = new ArrayList<>();
         Inventory inventory = new Inventory();
-
-        inventory.addItem(item);
-
-        if (inventory.isItemAvailable(item1)) {
-            System.out.println(item1.getName() + " is available for purchase.");
-        } else {
-            System.out.println(item1.getName() + " is out of stock.");
-        }
+        ItemBuilder builder = new ItemBuilder();
+        builder.setName("Oranges (x12)").setPrice(3.99);
+        items.add(ItemFactoryEagerSingleton.getInstance().getObject(builder));
+        builder.setName("Onions").setPrice(5.49);
+        items.add(ItemFactoryLazySingleton.getInstance().getObject(builder));
+        builder.setName("Pepsi (x6)").setPrice(8.49);
+        items.add(ItemFactoryEagerSingleton.getInstance().getObject(builder));
+        builder.setName("Oats").setPrice(10.0);
+        items.add(ItemFactoryLazySingleton.getInstance().getObject(builder));
+        items.stream().forEach(i -> {inventory.addItem(i);});
+        inventory.isItemAvailable(items.get(1));
         System.out.println("-----------------------END-----------------------");
     }
 

@@ -4,8 +4,8 @@ import java.util.List;
 
 public class InStockState implements State {
     @Override
-    public boolean isItemAvailable(Item item, List<Item> items) {
-        for (Item i : items) {
+    public boolean isItemAvailable(ItemAPI item, List<ItemAPI> items) {
+        for (ItemAPI i : items) {
             if (i.getName().equals(item.getName())) {
                 return true;
             }

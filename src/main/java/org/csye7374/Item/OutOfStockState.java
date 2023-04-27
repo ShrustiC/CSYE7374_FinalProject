@@ -4,7 +4,7 @@ import java.util.List;
 
 public class OutOfStockState implements State {
     @Override
-    public boolean isItemAvailable(Item item, List<Item> items) {
+    public boolean isItemAvailable(ItemAPI item, List<ItemAPI> items) {
         return false;
     }
 }
