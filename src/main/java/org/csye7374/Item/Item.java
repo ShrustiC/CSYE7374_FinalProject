@@ -43,8 +43,17 @@ public class Item implements ItemAPI {
                 '}';
     }
 
-    public ItemAPI clone() {
-        return new Item(price, name);
+    @Override
+    protected Object clone() {
+        try {
+            Item c = (Item) super.clone();
+            c.setPrice(0.0);
+            c.setName("");
+            return c;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new Item();
     }
-
 }

@@ -135,7 +135,7 @@ public class Driver {
     }
 
     private static void demoCompositeAdapter() {
-        System.out.println("-----------------------Decorator-----------------------");
+        System.out.println("-----------------------Composite-----------------------");
         ItemBuilder builder = new ItemBuilder();
         SingleStoreOrderBuilder walmartOrderBuilder = new SingleStoreOrderBuilder();
         walmartOrderBuilder.addItem(builder.setName("Chocolate Box").setPrice(10.0).build())
@@ -206,12 +206,20 @@ public class Driver {
     private static void demoPrototype() throws CloneNotSupportedException {
         System.out.println("-----------------------Prototype-----------------------");
         List<ItemAPI> items = new ArrayList<>();
-        ProtoClone protoclone = new ProtoClone();
-        ItemBuilder builder = new ItemBuilder();
-        builder.setName("Twix (x2)").setPrice(7.99);
-        items.add(ItemFactoryEagerSingleton.getInstance().getObject(builder));
-        builder.setName("Maggie 6").setPrice(5.49);
-        items.add(ItemFactoryLazySingleton.getInstance().getObject(builder));  
+        ItemPrototypeFactory factory = new ItemPrototypeFactory();
+        Item a = factory.getObject(ItemPrototypeFactory.ItemType.GROCERY_ITEM);
+        a.setName("Milk container");
+        a.setPrice(5.99);
+        Item b = factory.getObject(ItemPrototypeFactory.ItemType.ELECTRONIC_ITEM);
+        b.setName("PS5");
+        b.setPrice(499.99);
+        Item c = factory.getObject(ItemPrototypeFactory.ItemType.APPAREL_ITEM);
+        c.setName("Shirt");
+        c.setPrice(25.99);
+        items.add(a);
+        items.add(b);
+        items.add(c);
+        items.stream().forEach(i -> System.out.println(i));
         System.out.println("-----------------------END-----------------------");
     }
 }
