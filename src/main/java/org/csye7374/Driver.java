@@ -40,7 +40,12 @@ public class Driver {
         builder.setName("Oats").setPrice(10.0);
         items.add(ItemFactoryLazySingleton.getInstance().getObject(builder));
         items.stream().forEach(i -> {inventory.addItem(i);});
+        items.stream().forEach(i -> System.out.println(i));
+        System.out.println("Current item = " + items.get(1));
         inventory.isItemAvailable(items.get(1));
+        Item i = builder.setName("Eggs").setPrice(2.59).build();
+        System.out.println("Current item = " + i);
+        inventory.isItemAvailable(i);
         System.out.println("-----------------------END-----------------------");
     }
 
